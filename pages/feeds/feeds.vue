@@ -1,6 +1,6 @@
 <template>
-	<view class="content">
-		<button type="default">按钮</button>
+	<view>
+		<text>动态</text>
 	</view>
 </template>
 
@@ -8,17 +8,12 @@
 	export default {
 		data() {
 			return {
-			}
-		},
-		onLoad() {
-
-		},
-		methods: {
-
+				
+			};
 		}
 	}
 </script>
 
 <style lang="scss">
-	
+
 </style>

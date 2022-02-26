@@ -5,12 +5,55 @@
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}
+		}, {
+			"path": "pages/feeds/feeds",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
+	"tabBar": {
+		"color": "#000",
+		"selectedColor": "#0050FF",
+		"list": [{
+				"iconPath": "static/homepage.png",
+				"selectedIconPath": "static/selectedHomePage.png",
+				"text": "首页",
+				"pagePath": "pages/index/index"
+			},
+			{
+				"iconPath": "/static/list.png",
+				"selectedIconPath": "static/selectedList.png",
+				"text": "动态",
+				"pagePath": "pages/feeds/feeds"
+			},
+			{
+				"iconPath": "static/user.png",
+				"selectedIconPath": "static/selectedUser.png",
+				"text": "我的",
+				"pagePath": "pages/my/my"
+			}
+		]
+	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
+	},
+	"easycom": {
+		// 下载安装的方式需要前面的"@/"，npm安装的方式无需"@/"
+		// "^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+		// npm安装方式
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
 	}
 }

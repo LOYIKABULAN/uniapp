@@ -1,19 +1,44 @@
 {
-    "pages": [
-        "pages/index/index"
-    ],
-    "subPackages": [],
-    "window": {
-        "navigationBarTextStyle": "black",
-        "navigationBarTitleText": "uni-app",
-        "navigationBarBackgroundColor": "#F8F8F8",
-        "backgroundColor": "#F8F8F8"
-    },
-    "permission": {
-        "scope.userLocation": {
-            "desc": ""
-        }
-    },
-    "usingComponents": {},
-    "sitemapLocation": "sitemap.json"
+  "pages": [
+    "pages/index/index",
+    "pages/feeds/feeds",
+    "pages/my/my"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#000",
+    "selectedColor": "#0050FF",
+    "list": [
+      {
+        "iconPath": "static/homepage.png",
+        "selectedIconPath": "static/selectedHomePage.png",
+        "text": "首页",
+        "pagePath": "pages/index/index"
+      },
+      {
+        "iconPath": "/static/list.png",
+        "selectedIconPath": "static/selectedList.png",
+        "text": "动态",
+        "pagePath": "pages/feeds/feeds"
+      },
+      {
+        "iconPath": "static/user.png",
+        "selectedIconPath": "static/selectedUser.png",
+        "text": "我的",
+        "pagePath": "pages/my/my"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": ""
+    }
+  },
+  "usingComponents": {}
 }
