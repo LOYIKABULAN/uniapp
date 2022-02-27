@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/feeds/feeds",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/webview/webview"
   ],
   "subPackages": [],
   "window": {

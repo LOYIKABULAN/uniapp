@@ -1,7 +1,5 @@
 {
-  "navigationBarTitleText": "uni-app",
-  "usingComponents": {
-    "index-waterfall-sns-left": "/pages/index/index-waterfall-sns-left",
-    "index-waterfall-sns-right": "/pages/index/index-waterfall-sns-right"
-  }
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
+  "usingComponents": {}
 }

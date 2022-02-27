@@ -3,7 +3,8 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
 			}
 		}, {
 			"path": "pages/feeds/feeds",
@@ -20,7 +21,16 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/webview/webview",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"tabBar": {
 		"color": "#000",
 		"selectedColor": "#0050FF",
