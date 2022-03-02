@@ -93,6 +93,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uAvatar: function() {
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-avatar/u-avatar.vue */ 203))
+    },
+    uLoadmore: function() {
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-loadmore/u-loadmore")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 175))
+    },
+    uList: function() {
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-list/u-list */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-list/u-list")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-list/u-list.vue */ 248))
+    },
+    uListItem: function() {
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-list-item/u-list-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-list-item/u-list-item")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-list-item/u-list-item.vue */ 256))
+    },
+    uCell: function() {
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-cell/u-cell */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-cell/u-cell")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-cell/u-cell.vue */ 264))
+    }
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -165,21 +200,114 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _api = __webpack_require__(/*! ../../config/api.js */ 145);
-var _vuex = __webpack_require__(/*! vuex */ 137);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+var _vuex = __webpack_require__(/*! vuex */ 137);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var waterfallsFlow = function waterfallsFlow() {__webpack_require__.e(/*! require.ensure | components/maramlee-waterfalls-flow/maramlee-waterfalls-flow */ "components/maramlee-waterfalls-flow/maramlee-waterfalls-flow").then((function () {return resolve(__webpack_require__(/*! @/components/maramlee-waterfalls-flow/maramlee-waterfalls-flow.vue */ 166));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
 {
+  components: { waterfallsFlow: waterfallsFlow },
   data: function data() {
     return {
+      indexList: [],
+      indexTotal: 1,
+      status: 'loadmore',
+      swiperHeight: '10000px',
       swiperAdList: [],
-      currentSwiperIndex: 0 };
+      currentSwiperIndex: 0,
+      feedsParams: {
+        pageSize: 8,
+        pageNum: 1 },
+
+      newsParams: {
+        pageSize: 8,
+        pageNum: 1 },
+
+      feedsList: [],
+      feedsTotal: '',
+      listStatus: 'loadmore',
+      height: 1000 };
 
   },
   onLoad: function onLoad() {},
   computed: {},
-  methods: _objectSpread(_objectSpread({},
+  methods: _objectSpread(_objectSpread({
+    getIndexList: function getIndexList() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _this$indexList;var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                  (0, _api.getNewsList)({ params: _this.newsParams }));case 2:res = _context.sent;
+                (_this$indexList = _this.indexList).push.apply(_this$indexList, _toConsumableArray(res.list));
+                _this.indexTotal = res.total;
+
+                console.log(res);case 6:case "end":return _context.stop();}}}, _callee);}))();
+
+    },
+    setHeight: function setHeight(height) {var flag = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+      if (flag) {
+        this.height = height;
+        this.swiperHeight = this.height + 30 + 'px';
+
+      } else {
+        this.swiperHeight = height + 30 + 'px';
+      }
+
+    },
+    itemChange: function itemChange(info) {
+      this.currentSwiperIndex = info.detail.current;
+      if (this.currentSwiperIndex) {
+        var height = this.$refs.newsList.$el.offsetHeight;
+        this.setHeight(height, 0);
+      } else {
+
+        this.setHeight(this.height);
+      }
+
+    } },
   (0, _vuex.mapActions)(['addToken'])), {}, {
     // 请求 广告轮播图信息
-    getAdverts: function getAdverts() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+    getAdverts: function getAdverts() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
 
 
 
@@ -191,15 +319,14 @@ var _vuex = __webpack_require__(/*! vuex */ 137);function _interopRequireDefault
 
 
 
-                  (0, _api.getAdImage)());case 2:res = _context.sent;
-                _this.swiperAdList = res.map(function (item) {
+                  (0, _api.getAdImage)());case 2:res = _context2.sent;
+                _this2.swiperAdList = res.map(function (item) {
                   return {
                     id: item.id,
                     link: item.link,
                     image: item.image };
 
-                });
-                console.log(res);case 5:case "end":return _context.stop();}}}, _callee);}))();
+                });case 4:case "end":return _context2.stop();}}}, _callee2);}))();
     },
     gotoTab: function gotoTab(url) {
       uni.switchTab({
@@ -207,8 +334,8 @@ var _vuex = __webpack_require__(/*! vuex */ 137);function _interopRequireDefault
 
     },
     //转换推荐与资讯
-    swiperChange: function swiperChange(index) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
-                _this2.currentSwiperIndex = index;
+    swiperChange: function swiperChange(index) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+                _this3.currentSwiperIndex = index;
                 // const params = {
                 // 	user_name: 'admin',
                 // 	password: '123123'
@@ -217,10 +344,48 @@ var _vuex = __webpack_require__(/*! vuex */ 137);function _interopRequireDefault
                 // console.log(token)
                 // this.addToken(token.token)
                 // const userInfo =await getUserInfo({ custom: { auth: true } });
-              case 1:case "end":return _context2.stop();}}}, _callee2);}))();} }),
+              case 1:case "end":return _context3.stop();}}}, _callee3);}))();},
+    getFeeds: function getFeeds() {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var _this4$feedsList;var res;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:_context4.next = 2;return (
+                  (0, _api.getFeedsInfo)({ params: _this4.feedsParams }));case 2:res = _context4.sent;
+                _this4.feedsTotal = res.total;
+                (_this4$feedsList = _this4.feedsList).push.apply(_this4$feedsList, _toConsumableArray(res.list));case 5:case "end":return _context4.stop();}}}, _callee4);}))();
+    } }),
+
 
   mounted: function mounted() {
     this.getAdverts();
+    this.getFeeds();
+    this.getIndexList();
+  },
+  onPullDownRefresh: function onPullDownRefresh() {
+    console.log('refresh');
+    setTimeout(function () {
+      uni.stopPullDownRefresh();
+    }, 1000);
+  },
+  onReachBottom: function onReachBottom() {
+    if (this.currentSwiperIndex === 0) {
+      var page = this.feedsParams.pageNum;
+      var allPage = Math.ceil(this.feedsTotal / this.feedsParams.pageSize);
+      if (page >= allPage) return;
+      this.setHeight();
+      this.status = 'loading';
+      this.feedsParams.pageNum += 1;
+      this.getFeeds();
+      if (this.feedsParams.pageNum >= allPage) this.status = 'nomore';else
+      this.status = 'loading';
+    } else {
+      var _page = this.newsParams.pageNum;
+      var _allPage = Math.ceil(this.indexTotal / this.newsParams.pageSize);
+      if (_page >= _allPage) return;
+      var height = this.$refs.newsList.$el.offsetHeight;
+      this.setHeight(height, 0);
+      this.listStatus = 'loading';
+      this.newsParams.pageNum += 1;
+      this.getIndexList();
+      if (this.newsParams.pageNum >= _allPage) this.listStatus = 'nomore';else
+      this.listStatus = 'loading';
+    }
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

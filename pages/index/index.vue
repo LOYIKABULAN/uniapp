@@ -3,7 +3,7 @@
 		<!-- 页面 header 相关部分 -->
 		<view class="header-box">
 			<!-- 顶部广告位轮播图 -->
-			<swiper class="swiper" :indicator-dots="false" :autoplay="true" :interval="2500" :duration="500">
+			<swiper class="swiper" :indicator-dots="false" :autoplay="true" :interval="4500" :duration="500">
 				<swiper-item v-for="item in swiperAdList" :key="item.id">
 					<navigator open-type="navigate" :url="'/pages/webview/webview?url=' + item.link">
 						<image class="banner-swiper-img" :src="item.image" mode="aspectFill" />
@@ -29,22 +29,115 @@
 				<view class="one-nav" :class="currentSwiperIndex === 1 ? 'nav-actived' : ''" @tap="swiperChange(1)">资讯</view>
 			</view>
 		</view>
+
+		<!-- 内容轮播导航实现 -->
+		<swiper class="swiper-box" @change="itemChange" :style="'height:' + swiperHeight + ';'" :current="currentSwiperIndex">
+			<!-- 推荐动态实现 -->
+			<swiper-item class="swiper-item sns-now">
+				<template>
+					<waterfallsFlow @getHeight="setHeight" ref="waterfall" :list="feedsList" imageSrcKey="goods_image">
+						<!-- #ifndef  MP-WEIXIN -->
+						<template v-slot:default="item">
+							<!-- 此处添加插槽内容 -->
+							<view class="cnt">
+								<view class="title">{{ item.goods_name }}</view>
+								<view class="user-info">
+									<u-avatar class="avatar" size="30" :src="item.user_info.avatar"></u-avatar>
+									<text class="user-name">{{ item.user_info.user_name }}</text>
+								</view>
+							</view>
+						</template>
+						<!--  #endif -->
+
+						<!--  #ifdef  MP-WEIXIN -->
+						<!-- 微信小程序自定义内容 -->
+						<view v-for="(item, index) of feedsList" imageSrcKey="goods_image" :key="index" slot="slot{{index}}">
+							<view class="cnt">
+								<view class="title">{{ item.goods_name }}</view>
+							</view>
+							<view class="user-info">
+								<u-avatar class="avatar" size="30" :src="item.user_info.avatar"></u-avatar>
+								<text class="user-name">{{ item.user_info.user_name }}</text>
+							</view>
+						</view>
+						<!--  #endif -->
+					</waterfallsFlow>
+				</template>
+				<u-loadmore :status="status" />
+			</swiper-item>
+			<!-- 资讯列表实现 -->
+			<swiper-item class="swiper-item sns-news">
+				<u-list ref="newsList" @scrolltolower="scrolltolower">
+					<u-list-item v-for="(item, index) in indexList" :key="index">
+						<u-cell :title="item.title"><u-avatar slot="icon" shape="square" size="35" :src="item.image" customStyle="margin: -3px 5px -3px 0"></u-avatar></u-cell>
+					</u-list-item>
+				</u-list>
+				<u-loadmore :status="listStatus" />
+			</swiper-item>
+		</swiper>
 	</view>
 </template>
 
 <script>
-import { login, getUserInfo, getAdImage } from '../../config/api.js';
+import { login, getUserInfo, getAdImage, getFeedsInfo, getNewsList } from '../../config/api.js';
 import { mapActions } from 'vuex';
+import waterfallsFlow from '@/components/maramlee-waterfalls-flow/maramlee-waterfalls-flow.vue';
 export default {
+	components: { waterfallsFlow },
 	data() {
 		return {
+			indexList: [],
+			indexTotal:1,
+			status: 'loadmore',
+			swiperHeight: '10000px',
 			swiperAdList: [],
-			currentSwiperIndex: 0
+			currentSwiperIndex: 0,
+			feedsParams: {
+				pageSize: 8,
+				pageNum: 1
+			},
+			newsParams: {
+				pageSize: 8,
+				pageNum: 1
+			},
+			feedsList: [],
+			feedsTotal: '',
+			listStatus:'loadmore',
+			height:1000,
 		};
 	},
 	onLoad() {},
 	computed: {},
 	methods: {
+		async getIndexList() {
+			const res = await getNewsList({ params: this.newsParams });
+			this.indexList.push(...res.list);
+			this.indexTotal = res.total
+			
+			console.log(res);
+			
+		},
+		setHeight(height,flag=1) {
+			if(flag){
+				this.height = height
+				this.swiperHeight = this.height + 30 + 'px';
+				
+			}else{
+				this.swiperHeight = height +30 + 'px';
+			}
+			
+		},
+		itemChange(info) {
+			this.currentSwiperIndex = info.detail.current;
+			if(this.currentSwiperIndex){
+				let height = this.$refs.newsList.$el.offsetHeight
+				this.setHeight(height,0)
+			}else{
+				
+				this.setHeight(this.height)
+			}
+			
+		},
 		...mapActions(['addToken']),
 		// 请求 广告轮播图信息
 		async getAdverts() {
@@ -58,7 +151,7 @@ export default {
 			// 		image: item.data.image
 			// 	};
 			// });
-			
+
 			const res = await getAdImage();
 			this.swiperAdList = res.map(item => {
 				return {
@@ -67,7 +160,6 @@ export default {
 					image: item.image
 				};
 			});
-			console.log(res);
 		},
 		gotoTab(url) {
 			uni.switchTab({
@@ -85,10 +177,48 @@ export default {
 			// console.log(token)
 			// this.addToken(token.token)
 			// const userInfo =await getUserInfo({ custom: { auth: true } });
+		},
+		async getFeeds() {
+			const res = await getFeedsInfo({ params: this.feedsParams });
+			this.feedsTotal = res.total;
+			this.feedsList.push(...res.list);
 		}
 	},
+
 	mounted() {
-		this.getAdverts()
+		this.getAdverts();
+		this.getFeeds();
+		this.getIndexList();
+	},
+	onPullDownRefresh() {
+		console.log('refresh');
+		setTimeout(function() {
+			uni.stopPullDownRefresh();
+		}, 1000);
+	},
+	onReachBottom() {
+		if (this.currentSwiperIndex === 0) {
+			let page = this.feedsParams.pageNum;
+			const allPage = Math.ceil(this.feedsTotal / this.feedsParams.pageSize);
+			if (page >= allPage) return;
+			this.setHeight()
+			this.status = 'loading';
+			this.feedsParams.pageNum += 1;
+			this.getFeeds();
+			if (this.feedsParams.pageNum >= allPage) this.status = 'nomore';
+			else this.status = 'loading';
+		}else{
+			let page = this.newsParams.pageNum;
+			const allPage = Math.ceil(this.indexTotal / this.newsParams.pageSize);
+			if (page >= allPage) return;
+			let height = this.$refs.newsList.$el.offsetHeight
+			this.setHeight(height,0)
+			this.listStatus = 'loading';
+			this.newsParams.pageNum += 1;
+			this.getIndexList();
+			if (this.newsParams.pageNum >= allPage) this.listStatus = 'nomore';
+			else this.listStatus = 'loading';
+		}
 	}
 };
 </script>
@@ -240,9 +370,11 @@ export default {
 // 此刻 栏目样式\
 .swiper-box {
 	background-color: #f1f1f1;
-	padding: 60upx 0 40upx;
+	padding: 60upx 30upx 40upx;
 }
-
+.swiper-item {
+	overflow: hidden;
+}
 .sns-now {
 	// 动态相关瀑布流样式
 	.feeds-box {
@@ -305,19 +437,6 @@ export default {
 						padding: 0 10upx;
 						background-color: #ffffff;
 					}
-				}
-
-				.avatar {
-					margin-right: 10upx;
-					height: 40upx;
-					width: 40upx;
-					border-radius: 50%;
-					border: 1upx solid #eee;
-				}
-
-				.name {
-					max-width: 120upx;
-					color: #757474;
 				}
 
 				.micon {
@@ -403,6 +522,27 @@ export default {
 				border-radius: 6upx;
 			}
 		}
+	}
+}
+
+//推荐
+
+.cnt {
+	display: flex;
+	flex-direction: column;
+	.title {
+		padding: 20rpx;
+	}
+}
+
+.user-info {
+	display: flex;
+	justify-content: flex-start;
+	padding: 0 0 20rpx 18rpx;
+	.user-name {
+		padding-left: 5rpx;
+		text-align: center;
+		line-height: 53rpx;
 	}
 }
 </style>

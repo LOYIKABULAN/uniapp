@@ -1,5 +1,13 @@
 {
   "navigationStyle": "custom",
   "enablePullDownRefresh": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "index-waterfalls-flow-default": "/pages/index/index-waterfalls-flow-default",
+    "u-avatar": "/node-modules/uview-ui/components/u-avatar/u-avatar",
+    "u-loadmore": "/node-modules/uview-ui/components/u-loadmore/u-loadmore",
+    "u-list": "/node-modules/uview-ui/components/u-list/u-list",
+    "u-list-item": "/node-modules/uview-ui/components/u-list-item/u-list-item",
+    "u-cell": "/node-modules/uview-ui/components/u-cell/u-cell",
+    "waterfalls-flow": "/components/maramlee-waterfalls-flow/maramlee-waterfalls-flow"
+  }
 }
