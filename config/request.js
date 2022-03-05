@@ -1,5 +1,7 @@
+
 // 此vm参数为页面的实例，可以通过它引用vuex中的变量
 module.exports = (vm) => {
+	
     // 初始化请求配置
     uni.$u.http.setConfig((config) => {
         /* config 为默认全局配置*/
@@ -39,6 +41,11 @@ module.exports = (vm) => {
 				// 否则返回一个pending中的promise，请求不会进入catch中
 				return new Promise(() => { })
 			}
+		}
+		if(data.code=== 10101 || data.code === 10102){
+			console.log(vm.$store.dispatch('addToken',''))
+			console.log(vm.$store.state.userInfo.token)
+			console.log('token失效')
 		}
 		return data.result === undefined ? {} : data.result
 	}, (response) => { 

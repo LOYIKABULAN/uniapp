@@ -35,11 +35,11 @@
 			<!-- 推荐动态实现 -->
 			<swiper-item class="swiper-item sns-now">
 				<template>
-					<waterfallsFlow @getHeight="setHeight" ref="waterfall" :list="feedsList" imageSrcKey="goods_image">
+					<waterfallsFlow @wapper-lick='showLogin'  @getHeight="setHeight" ref="waterfall" :list="feedsList" imageSrcKey="goods_image">
 						<!-- #ifndef  MP-WEIXIN -->
-						<template v-slot:default="item">
+						<template  v-slot:default="item">
 							<!-- 此处添加插槽内容 -->
-							<view class="cnt">
+							<view  class="cnt">
 								<view class="title">{{ item.goods_name }}</view>
 								<view class="user-info">
 									<u-avatar class="avatar" size="30" :src="item.user_info.avatar"></u-avatar>
@@ -52,12 +52,12 @@
 						<!--  #ifdef  MP-WEIXIN -->
 						<!-- 微信小程序自定义内容 -->
 						<view v-for="(item, index) of feedsList" imageSrcKey="goods_image" :key="index" slot="slot{{index}}">
-							<view class="cnt">
+							<view   class="cnt">
 								<view class="title">{{ item.goods_name }}</view>
-							</view>
-							<view class="user-info">
-								<u-avatar class="avatar" size="30" :src="item.user_info.avatar"></u-avatar>
-								<text class="user-name">{{ item.user_info.user_name }}</text>
+								<view class="user-info">
+									<u-avatar class="avatar" size="30" :src="item.user_info.avatar"></u-avatar>
+									<text class="user-name">{{ item.user_info.user_name }}</text>
+								</view>
 							</view>
 						</view>
 						<!--  #endif -->
@@ -66,28 +66,39 @@
 				<u-loadmore :status="status" />
 			</swiper-item>
 			<!-- 资讯列表实现 -->
-			<swiper-item class="swiper-item sns-news">
-				<u-list ref="newsList" @scrolltolower="scrolltolower">
-					<u-list-item v-for="(item, index) in indexList" :key="index">
-						<u-cell :title="item.title"><u-avatar slot="icon" shape="square" size="35" :src="item.image" customStyle="margin: -3px 5px -3px 0"></u-avatar></u-cell>
-					</u-list-item>
-				</u-list>
+			<swiper-item style="background-color: #F1F1F1;" class="swiper-item sns-news">
+				<view class="news_list" ref="newsList">
+					<view v-for="(item, index) in indexList" :key="index">
+						<view class="news_box">
+							<view class="news_content">
+								<u-text :lines="2" size="25" :text="item.title" class="news_title"></u-text>
+								<view class="news_date">
+									<text style="font-size: 10rpx;">
+									 更新时间:{{ timeChange(item.updatedAt) }}
+									 创建时间:{{ timeChange(item.createdAt) }}</text>
+								</view>
+							</view>
+							<u--image shape="square" radius="10" :showLoading="true" width="180rpx" height="180rpx" class="news_image" :src="item.image"></u--image>
+						</view>
+					</view>
+				</view>
 				<u-loadmore :status="listStatus" />
 			</swiper-item>
 		</swiper>
+		<login ref="login"></login>
 	</view>
 </template>
 
 <script>
 import { login, getUserInfo, getAdImage, getFeedsInfo, getNewsList } from '../../config/api.js';
-import { mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import waterfallsFlow from '@/components/maramlee-waterfalls-flow/maramlee-waterfalls-flow.vue';
 export default {
 	components: { waterfallsFlow },
 	data() {
 		return {
 			indexList: [],
-			indexTotal:1,
+			indexTotal: 1,
 			status: 'loadmore',
 			swiperHeight: '10000px',
 			swiperAdList: [],
@@ -102,56 +113,78 @@ export default {
 			},
 			feedsList: [],
 			feedsTotal: '',
-			listStatus:'loadmore',
-			height:1000,
+			listStatus: 'loadmore',
+			height: 1000
 		};
 	},
 	onLoad() {},
-	computed: {},
+	computed: {
+		...mapState(['userInfo'])
+	},
+
 	methods: {
+		
+		...mapActions(['addToken']),
+		showLogin(item){
+			if(this.userInfo.token.length === 0){
+				uni.showToast({
+					title:'请登录',
+					icon:'error'
+				})
+				this.$refs.login.open();
+			}
+			
+		},
+		timeChange(data) {
+			let time = data; //将需要格式化的数据传入
+			time = this.dayjs(time).format('YYYY-MM-DD HH:mm:ss');
+			return time;
+		},
+		scrolltolower() {
+			let page = this.newsParams.pageNum;
+			const allPage = Math.ceil(this.indexTotal / this.newsParams.pageSize);
+			if (page >= allPage) return;
+			this.listStatus = 'loading';
+			this.newsParams.pageNum += 1;
+			this.getIndexList();
+
+			if (this.newsParams.pageNum >= allPage) this.listStatus = 'nomore';
+			else this.listStatus = 'loading';
+		},
 		async getIndexList() {
 			const res = await getNewsList({ params: this.newsParams });
 			this.indexList.push(...res.list);
-			this.indexTotal = res.total
-			
-			console.log(res);
-			
+			this.indexTotal = res.total;
 		},
-		setHeight(height,flag=1) {
-			if(flag){
-				this.height = height
+		setHeight(height, flag = 1) {
+			if (flag) {
+				this.height = height;
 				this.swiperHeight = this.height + 30 + 'px';
-				
-			}else{
-				this.swiperHeight = height +30 + 'px';
+			} else {
+				this.swiperHeight = height + 30 + 'px';
 			}
-			
 		},
 		itemChange(info) {
 			this.currentSwiperIndex = info.detail.current;
-			if(this.currentSwiperIndex){
-				let height = this.$refs.newsList.$el.offsetHeight
-				this.setHeight(height,0)
-			}else{
-				
-				this.setHeight(this.height)
+			let view = uni.createSelectorQuery().select('.news_list');
+
+			if (this.currentSwiperIndex) {
+				view.boundingClientRect(data => {
+					// console.log("得到布局位置信息" + JSON.stringify(data));
+					// console.log("节点离页面顶部的距离为" + data.top);
+					// 计算高度值并赋值
+					//this.mainClientHeight=data.height;
+
+					this.setHeight(data.height, 0);
+					//console.log(data.height);
+				}).exec();
+			} else {
+				this.setHeight(this.height);
 			}
-			
 		},
 		...mapActions(['addToken']),
 		// 请求 广告轮播图信息
 		async getAdverts() {
-			// let adverts = await this.$u.api.getAdvert({
-			// 	space: '1,2,3'
-			// });
-			// this.swiperAdList = adverts.data.map(item => {
-			// 	return {
-			// 		id: item.id,
-			// 		link: item.data.link,
-			// 		image: item.data.image
-			// 	};
-			// });
-
 			const res = await getAdImage();
 			this.swiperAdList = res.map(item => {
 				return {
@@ -169,14 +202,7 @@ export default {
 		//转换推荐与资讯
 		async swiperChange(index) {
 			this.currentSwiperIndex = index;
-			// const params = {
-			// 	user_name: 'admin',
-			// 	password: '123123'
-			// };
-			// const token = await login(params)
-			// console.log(token)
-			// this.addToken(token.token)
-			// const userInfo =await getUserInfo({ custom: { auth: true } });
+
 		},
 		async getFeeds() {
 			const res = await getFeedsInfo({ params: this.feedsParams });
@@ -191,33 +217,38 @@ export default {
 		this.getIndexList();
 	},
 	onPullDownRefresh() {
-		console.log('refresh');
+		uni.reLaunch({
+			url: '../index/index'
+		});
 		setTimeout(function() {
 			uni.stopPullDownRefresh();
 		}, 1000);
 	},
+
 	onReachBottom() {
 		if (this.currentSwiperIndex === 0) {
 			let page = this.feedsParams.pageNum;
 			const allPage = Math.ceil(this.feedsTotal / this.feedsParams.pageSize);
 			if (page >= allPage) return;
-			this.setHeight()
+			// this.setHeight();
 			this.status = 'loading';
 			this.feedsParams.pageNum += 1;
 			this.getFeeds();
 			if (this.feedsParams.pageNum >= allPage) this.status = 'nomore';
 			else this.status = 'loading';
-		}else{
-			let page = this.newsParams.pageNum;
-			const allPage = Math.ceil(this.indexTotal / this.newsParams.pageSize);
-			if (page >= allPage) return;
-			let height = this.$refs.newsList.$el.offsetHeight
-			this.setHeight(height,0)
-			this.listStatus = 'loading';
-			this.newsParams.pageNum += 1;
-			this.getIndexList();
-			if (this.newsParams.pageNum >= allPage) this.listStatus = 'nomore';
-			else this.listStatus = 'loading';
+		} else {
+			this.scrolltolower();
+			setTimeout(() => {
+				let view = uni.createSelectorQuery().select('.news_list');
+				view.boundingClientRect(data => {
+					// console.log("得到布局位置信息" + JSON.stringify(data));
+					// console.log("节点离页面顶部的距离为" + data.top);
+					// 计算高度值并赋值
+					//this.mainClientHeight=data.height;
+					this.setHeight(data.height, 0);
+					// console.log(data.height);
+				}).exec();
+			}, 100);
 		}
 	}
 };
@@ -544,5 +575,30 @@ export default {
 		text-align: center;
 		line-height: 53rpx;
 	}
+}
+//资讯盒子
+.news_box {
+	background-color: #ffffff;
+	border-radius: 10rpx;
+	justify-content: space-between;
+	padding: 20rpx;
+	margin: 10rpx 0;
+	display: flex;
+	align-items: center;
+	.new_content {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.news_title {
+	height: 150rpx;
+	font-size: 50rpx;
+}
+.news_image {
+	border-radius: 12rpx;
+}
+.news_date {
+	color: gray;
 }
 </style>

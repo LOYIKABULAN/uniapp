@@ -9,14 +9,14 @@
 		}, {
 			"path": "pages/feeds/feeds",
 			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
 			}
 
 		}, {
 			"path": "pages/my/my",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
 				"enablePullDownRefresh": false
 			}
 

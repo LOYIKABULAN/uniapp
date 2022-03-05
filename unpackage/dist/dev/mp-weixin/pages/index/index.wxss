@@ -297,4 +297,27 @@
   text-align: center;
   line-height: 53rpx;
 }
+.news_box.data-v-57280228 {
+  background-color: #ffffff;
+  border-radius: 10rpx;
+  justify-content: space-between;
+  padding: 20rpx;
+  margin: 10rpx 0;
+  display: flex;
+  align-items: center;
+}
+.news_box .new_content.data-v-57280228 {
+  display: flex;
+  flex-direction: column;
+}
+.news_title.data-v-57280228 {
+  height: 150rpx;
+  font-size: 50rpx;
+}
+.news_image.data-v-57280228 {
+  border-radius: 12rpx;
+}
+.news_date.data-v-57280228 {
+  color: gray;
+}
 
