@@ -1,21 +1,5 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pages/index/index"],{
 
-/***/ 140:
-/*!******************************************************************************!*\
-  !*** C:/Users/87622/Desktop/uniapp/main.js?{"page":"pages%2Findex%2Findex"} ***!
-  \******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 5);
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 3));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/index/index.vue */ 141));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}wx.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
-createPage(_index.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
-
-/***/ }),
-
 /***/ 141:
 /*!***********************************************************!*\
   !*** C:/Users/87622/Desktop/uniapp/pages/index/index.vue ***!
@@ -312,13 +296,24 @@ var _vuex = __webpack_require__(/*! vuex */ 137);function _interopRequireDefault
   methods: _objectSpread(_objectSpread(_objectSpread({},
 
   (0, _vuex.mapActions)(['addToken'])), {}, {
-    showLogin: function showLogin(item) {
+    showLogin: function showLogin(item) {var flag = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       if (this.userInfo.token.length === 0) {
         uni.showToast({
           title: '请登录',
           icon: 'error' });
 
         this.$refs.login.open();
+      } else {
+        if (!flag) {
+          uni.navigateTo({
+            url: '../../subpages/feedInfo?data=' + JSON.stringify(item) });
+
+        } else {
+          uni.navigateTo({
+            url: '../../subpages/newsInfo?data=' + JSON.stringify(item) });
+
+        }
+
       }
 
     },
@@ -469,7 +464,23 @@ __webpack_require__.r(__webpack_exports__);
     if(false) { var cssReload; }
   
 
+/***/ }),
+
+/***/ 343:
+/*!******************************************************************************!*\
+  !*** C:/Users/87622/Desktop/uniapp/main.js?{"page":"pages%2Findex%2Findex"} ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 5);
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 3));
+var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/index/index.vue */ 141));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}wx.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
+createPage(_index.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
 /***/ })
 
-},[[140,"common/runtime","common/vendor"]]]);
+},[[343,"common/runtime","common/vendor"]]]);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/index/index.js.map

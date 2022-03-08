@@ -31,6 +31,40 @@
             
         }
     ],
+	"subPackages":[
+		{
+			"root":"subpages",
+			"pages":[
+				{
+					"path":"feedInfo",
+					"style":{
+						"navigationBarTitleText":"详情",
+						"navigationBarTextStyle":"black",
+						"navigationBarBackgroundColor":"#FFFFFF",
+						"backgroundColor":"#FFFFFF"
+					}
+				},
+				{
+					"path":"newsInfo",
+					"style":{
+						"navigationBarTitleText":"详情",
+						"navigationBarTextStyle":"black",
+						"navigationBarBackgroundColor":"#FFFFFF",
+						"backgroundColor":"#FFFFFF"
+					}
+				},
+				{
+					"path":"mySetting",
+					"style":{
+						"navigationBarTitleText":"个人设置",
+						"navigationBarTextStyle":"black",
+						"navigationBarBackgroundColor":"#FFFFFF",
+						"backgroundColor":"#FFFFFF"
+					}
+				}
+			]
+		}
+	],
 	"tabBar": {
 		"color": "#000",
 		"selectedColor": "#0050FF",

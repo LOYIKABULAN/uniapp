@@ -69,7 +69,7 @@
 			<swiper-item style="background-color: #F1F1F1;" class="swiper-item sns-news">
 				<view class="news_list" ref="newsList">
 					<view v-for="(item, index) in indexList" :key="index">
-						<view class="news_box">
+						<view class="news_box" @click="showLogin(item,true)">
 							<view class="news_content">
 								<u-text :lines="2" size="25" :text="item.title" class="news_title"></u-text>
 								<view class="news_date">
@@ -125,13 +125,24 @@ export default {
 	methods: {
 		
 		...mapActions(['addToken']),
-		showLogin(item){
+		showLogin(item,flag=false){
 			if(this.userInfo.token.length === 0){
 				uni.showToast({
 					title:'请登录',
 					icon:'error'
 				})
 				this.$refs.login.open();
+			}else{
+				if(!flag){
+					uni.navigateTo({
+						url:'../../subpages/feedInfo?data='+JSON.stringify(item)
+					})
+				}else{
+					uni.navigateTo({
+						url:'../../subpages/newsInfo?data='+JSON.stringify(item)
+					})
+				}
+				
 			}
 			
 		},

@@ -8,8 +8,18 @@ export const getUserInfo = (params,config={}) => http.get('/user/info', params,c
 //获取广告图
 export const getAdImage = (params,config={}) => http.get('/advertisement/getAd',params,config)
 
+
 //获取动态信息
 export const getFeedsInfo = (config={}) =>http.get('goods/feeds',config)
 
 //获取资讯列表
 export const getNewsList = (config={}) =>http.get('news/getNews',config)
+
+//修改密码、头像、用户名
+export const changeUserName = (params,config={}) => http.post('user/changeUserName',params,config)
+export const changeAvatar = (params,config={}) => http.post('user/changeAvatar',params,config)
+export const changePassword = (params,config={}) => http.post('user/',params,config)
+
+//上传图片
+
+// export const upload = (config={}) => http.upload('goods/upoload',config)

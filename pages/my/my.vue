@@ -20,27 +20,20 @@
 				<view class="view-circle" />
 
 				<view class="user-tabs">
-					<view class="tab-item left" @tap="gotoLink('/subpages/setting/setting')">
+					<view class="tab-item left" style="width: 94%;" @click="gotoLink('../../subpages/mySetting')">
 						<image class="tab-svg" src="@/static/setup_b.png" mode="aspectFit" />
 						<text class="tab-name">个人设置</text>
 					</view>
-					<view class="tab-item" @tap="viewMsg">
+					<!-- <view class="tab-item" @tap="viewMsg">
 						<image class="tab-svg" src="@/static/bell.png" mode="aspectFit" />
 						<text class="tab-name">我的消息</text>
-						<!-- <text class="badges right" >0000</text> -->
-					</view>
+						<text class="badges right" >0000</text>
+					</view> -->
 				</view>
 			</view>
 
 			<view class="feeds-box">
-				<button class="resident-information">
-					<text class="text">住户信息</text>
-					<u-icon name="home" size="30"></u-icon>
-				</button>
-				<button class="resident-information">
-					<text class="text">设备报修</text>
-					<u-icon name="tags" size="30"></u-icon>
-				</button>
+				
 			</view>
 			<button class="logout" type="warn" @click="logout">退出登录</button>
 		</view>
@@ -66,6 +59,12 @@ export default {
 	onLoad() {},
 	onPullDownRefresh() {},
 	methods: {
+		gotoLink(url){
+			console.log(url)
+			uni.navigateTo({
+				url
+			})
+		},
 		showLogin() {
 			if (this.token.length === 0) {
 				this.$refs.login.open();

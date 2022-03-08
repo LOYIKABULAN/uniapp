@@ -2,46 +2,61 @@
 	<view class="rfeeds">
 		<view class="one-feeds-box" v-for="(feedsList, i) in showFeedsList" :key="i">
 			<view v-for="(item, k) in feedsList" :key="item.id" class="one-feed" :class="k % 6 == 0 ? (i % 2 == 0 ? 'feed-big-left' : 'feed-big-right') : ''">
-				<navigator :url="'/subpages/feedinfo/feedinfo?id=' + item.id"><image :src="item.cover" class="feed-content" mode="aspectFill" :lazy-load="true" /></navigator>
+				<image @click="toFeedsDetail(item)" :src="item.goods_image" class="feed-content" mode="aspectFill" :lazy-load="true" />
 			</view>
 		</view>
 		<u-loadmore :status="feedStatus" />
 		<!-- 分享按钮组件 -->
 		<!-- <goto-share /> -->
+		<login ref="login"></login>
 	</view>
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import { getFeedsInfo } from '../../config/api.js';
 export default {
 	data() {
 		return {
 			feedsList: [],
 			showFeedsList: [],
-			feedsParams:{
-				pageSize:18,
-				pageNum:1
+			feedsParams: {
+				pageSize: 18,
+				pageNum: 1
 			},
-			feedStatus:'loadmore',
-			feedsTotal:1,
+			feedStatus: 'loadmore',
+			feedsTotal: 1
 		};
+	},
+	computed:{
+		...mapState(['userInfo'])
 	},
 	mounted() {
 		this.getFeeds();
 	},
 	methods: {
+		toFeedsDetail(item) {
+			if (this.userInfo.token.length === 0) {
+				uni.showToast({
+					title: '请登录',
+					icon: 'error'
+				});
+				this.$refs.login.open();
+			} else {
+				uni.navigateTo({
+					url: '../../subpages/feedInfo?data=' + JSON.stringify(item)
+				});
+			}
+		},
 		async getFeeds() {
-			const params = this.feedsParams
-			const res = await getFeedsInfo({params});
-			this.feedsTotal = res.total
+			const params = this.feedsParams;
+			const res = await getFeedsInfo({ params });
+			this.feedsTotal = res.total;
 			const feeds = res.list.map(item => {
-				return {
-					id: item.id,
-					cover: item.goods_image
-				};
+				return item;
 			});
 			this.feedsList.push(...feeds);
-			
+
 			let showArrList = [];
 			for (let i = 0; i < this.feedsList.length; i++) {
 				if (i % 6 === 0 && !!this.feedsList[i + 5]) {
@@ -52,7 +67,7 @@ export default {
 			console.log(this.showFeedsList);
 		}
 	},
-	onReachBottom() {	
+	onReachBottom() {
 		let page = this.feedsParams.pageNum;
 		const allPage = Math.ceil(this.feedsTotal / this.feedsParams.pageSize);
 		if (page >= allPage) return;
@@ -62,7 +77,7 @@ export default {
 		this.getFeeds();
 		if (this.feedsParams.pageNum >= allPage) this.feedStatus = 'nomore';
 		else this.feedStatus = 'loading';
-	},
+	}
 };
 </script>
 <style lang="scss" scoped>

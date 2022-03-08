@@ -57,6 +57,12 @@ const store = new Vuex.Store({
 			commit('SETUSERNAME',info.user_name);
 			commit('SETAVATAR',info.avatar)
 		},
+		addAvatar({commit,state},info){
+			commit('SETAVATAR',info.avatar)
+		},
+		addUserName({commit,state},info){
+			commit('SETUSERNAME',info.user_name);
+		},
 		deleteToken({commit,state}){
 			commit('CLEARTOKEN');
 			commit('CLEARAVATAR');
