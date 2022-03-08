@@ -158,6 +158,7 @@ export default {
 				if(this.form3.user_name.length){
 					try {
 						await changeUserName(this.form3, { custom: { auth: true } });
+						this.addUserName(this.form3.user_name)
 						this.$refs.uToast.show({
 							type: 'success',
 							title: '成功主题(带图标)',

@@ -61,6 +61,24 @@
 						"navigationBarBackgroundColor":"#FFFFFF",
 						"backgroundColor":"#FFFFFF"
 					}
+				},
+				{
+					"path":"resident",
+					"style":{
+						"navigationBarTitleText":"住户信息",
+						"navigationBarTextStyle":"black",
+						"navigationBarBackgroundColor":"#FFFFFF",
+						"backgroundColor":"#FFFFFF"
+					}
+				},
+				{
+					"path":"device",
+					"style":{
+						"navigationBarTitleText":"报修信息",
+						"navigationBarTextStyle":"black",
+						"navigationBarBackgroundColor":"#FFFFFF",
+						"backgroundColor":"#FFFFFF"
+					}
 				}
 			]
 		}

@@ -23,23 +23,35 @@
 					<view class="iright"><view class="title">个人中心</view></view>
 				</view>
 			</view>
-			<!-- Tab 选项卡 -->
-			<view class="tabs-box">
-				<view class="one-nav" :class="currentSwiperIndex === 0 ? 'nav-actived' : ''" @tap="swiperChange(0)">推荐</view>
-				<view class="one-nav" :class="currentSwiperIndex === 1 ? 'nav-actived' : ''" @tap="swiperChange(1)">资讯</view>
-			</view>
 		</view>
 
+		<!-- 功能 -->
+		<view class="funtion-grid">
+			<u-grid :border="false" col="3">
+				<u-grid-item v-for="(listItem, listIndex) in funtionList" :key="listIndex">
+					<view @click="toFunction(listIndex)" style="display: flex; flex-direction: column; align-items: center;">
+						<u-icon :customStyle="{ paddingTop: 20 + 'rpx' }" :name="listItem.name" :size="22"></u-icon>
+						<text class="grid-text">{{ listItem.title }}</text>
+					</view>
+				</u-grid-item>
+			</u-grid>
+		</view>
+
+		<!-- Tab 选项卡 -->
+		<view class="tabs-box">
+			<view class="one-nav" :class="currentSwiperIndex === 0 ? 'nav-actived' : ''" @tap="swiperChange(0)">推荐</view>
+			<view class="one-nav" :class="currentSwiperIndex === 1 ? 'nav-actived' : ''" @tap="swiperChange(1)">资讯</view>
+		</view>
 		<!-- 内容轮播导航实现 -->
 		<swiper class="swiper-box" @change="itemChange" :style="'height:' + swiperHeight + ';'" :current="currentSwiperIndex">
 			<!-- 推荐动态实现 -->
 			<swiper-item class="swiper-item sns-now">
 				<template>
-					<waterfallsFlow @wapper-lick='showLogin'  @getHeight="setHeight" ref="waterfall" :list="feedsList" imageSrcKey="goods_image">
+					<waterfallsFlow @wapper-lick="showLogin" @getHeight="setHeight" ref="waterfall" :list="feedsList" imageSrcKey="goods_image">
 						<!-- #ifndef  MP-WEIXIN -->
-						<template  v-slot:default="item">
+						<template v-slot:default="item">
 							<!-- 此处添加插槽内容 -->
-							<view  class="cnt">
+							<view class="cnt">
 								<view class="title">{{ item.goods_name }}</view>
 								<view class="user-info">
 									<u-avatar class="avatar" size="30" :src="item.user_info.avatar"></u-avatar>
@@ -52,7 +64,7 @@
 						<!--  #ifdef  MP-WEIXIN -->
 						<!-- 微信小程序自定义内容 -->
 						<view v-for="(item, index) of feedsList" imageSrcKey="goods_image" :key="index" slot="slot{{index}}">
-							<view   class="cnt">
+							<view class="cnt">
 								<view class="title">{{ item.goods_name }}</view>
 								<view class="user-info">
 									<u-avatar class="avatar" size="30" :src="item.user_info.avatar"></u-avatar>
@@ -69,13 +81,11 @@
 			<swiper-item style="background-color: #F1F1F1;" class="swiper-item sns-news">
 				<view class="news_list" ref="newsList">
 					<view v-for="(item, index) in indexList" :key="index">
-						<view class="news_box" @click="showLogin(item,true)">
+						<view class="news_box" @click="showLogin(item, true)">
 							<view class="news_content">
 								<u-text :lines="2" size="25" :text="item.title" class="news_title"></u-text>
 								<view class="news_date">
-									<text style="font-size: 10rpx;">
-									 更新时间:{{ timeChange(item.updatedAt) }}
-									 创建时间:{{ timeChange(item.createdAt) }}</text>
+									<text style="font-size: 10rpx;">更新时间:{{ timeChange(item.updatedAt) }} 创建时间:{{ timeChange(item.createdAt) }}</text>
 								</view>
 							</view>
 							<u--image shape="square" radius="10" :showLoading="true" width="180rpx" height="180rpx" class="news_image" :src="item.image"></u--image>
@@ -86,6 +96,7 @@
 			</swiper-item>
 		</swiper>
 		<login ref="login"></login>
+		<u-toast ref="uToast" />
 	</view>
 </template>
 
@@ -97,6 +108,32 @@ export default {
 	components: { waterfallsFlow },
 	data() {
 		return {
+			funtionList: [
+				{
+					name: 'man-add',
+					title: '住户信息'
+				},
+				{
+					name: 'lock',
+					title: '设施报修'
+				},
+				{
+					name: 'star',
+					title: '星星'
+				},
+				{
+					name: 'hourglass',
+					title: '沙漏'
+				},
+				{
+					name: 'home',
+					title: '首页'
+				},
+				{
+					name: 'grid',
+					title: '更多'
+				}
+			],
 			indexList: [],
 			indexTotal: 1,
 			status: 'loadmore',
@@ -123,28 +160,42 @@ export default {
 	},
 
 	methods: {
-		
 		...mapActions(['addToken']),
-		showLogin(item,flag=false){
-			if(this.userInfo.token.length === 0){
-				uni.showToast({
-					title:'请登录',
-					icon:'error'
+		toFunction(index) {
+			switch (index) {
+				case 0:
+				uni.navigateTo({
+					url:'../../subpages/resident'
 				})
-				this.$refs.login.open();
-			}else{
-				if(!flag){
-					uni.navigateTo({
-						url:'../../subpages/feedInfo?data='+JSON.stringify(item)
-					})
-				}else{
-					uni.navigateTo({
-						url:'../../subpages/newsInfo?data='+JSON.stringify(item)
-					})
-				}
-				
+					break;
+				case 1:
+				uni.navigateTo({
+					url:'../../subpages/device'
+				})
+					break;
+				default:
+					this.$refs.uToast.warning(`该功能正在开发中敬请期待！`);
+					break;
 			}
-			
+		},
+		showLogin(item, flag = false) {
+			if (this.userInfo.token.length === 0) {
+				uni.showToast({
+					title: '请登录',
+					icon: 'error'
+				});
+				this.$refs.login.open();
+			} else {
+				if (!flag) {
+					uni.navigateTo({
+						url: '../../subpages/feedInfo?data=' + JSON.stringify(item)
+					});
+				} else {
+					uni.navigateTo({
+						url: '../../subpages/newsInfo?data=' + JSON.stringify(item)
+					});
+				}
+			}
 		},
 		timeChange(data) {
 			let time = data; //将需要格式化的数据传入
@@ -213,7 +264,6 @@ export default {
 		//转换推荐与资讯
 		async swiperChange(index) {
 			this.currentSwiperIndex = index;
-
 		},
 		async getFeeds() {
 			const res = await getFeedsInfo({ params: this.feedsParams });
@@ -269,9 +319,12 @@ export default {
 #sns {
 	background-color: #f1f1f1;
 }
-
+.content {
+	background-color: #f1f1f1;
+}
 // 推荐、咨询 按钮样式
 .tabs-box {
+	background-color: #f1f1f1;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -611,5 +664,11 @@ export default {
 }
 .news_date {
 	color: gray;
+}
+.funtion-grid {
+	margin: 10rpx 30rpx 30rpx;
+	background-color: #ffffff;
+	padding: 40rpx 0;
+	border-radius: 20rpx;
 }
 </style>

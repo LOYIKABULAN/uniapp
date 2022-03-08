@@ -2,11 +2,15 @@
   "navigationStyle": "custom",
   "enablePullDownRefresh": true,
   "usingComponents": {
+    "u-grid": "/node-modules/uview-ui/components/u-grid/u-grid",
+    "u-grid-item": "/node-modules/uview-ui/components/u-grid-item/u-grid-item",
+    "u-icon": "/node-modules/uview-ui/components/u-icon/u-icon",
     "u-avatar": "/node-modules/uview-ui/components/u-avatar/u-avatar",
     "u-loadmore": "/node-modules/uview-ui/components/u-loadmore/u-loadmore",
     "u-text": "/node-modules/uview-ui/components/u-text/u-text",
     "u--image": "/node-modules/uview-ui/components/u--image/u--image",
     "login": "/components/login/login",
+    "u-toast": "/node-modules/uview-ui/components/u-toast/u-toast",
     "waterfalls-flow": "/components/maramlee-waterfalls-flow/maramlee-waterfalls-flow"
   }
 }
