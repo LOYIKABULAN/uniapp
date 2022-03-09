@@ -328,12 +328,12 @@ export default {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	width: 750upx;
+	width: 750rpx;
 
 	.one-nav {
-		width: 120upx;
+		width: 120rpx;
 		color: #9b9b9b;
-		font-size: 36upx;
+		font-size: 36rpx;
 		text-align: center;
 		font-weight: blod;
 
@@ -346,14 +346,14 @@ export default {
 .header-box {
 	position: relative;
 	left: 0;
-	height: 500upx;
+	height: 500rpx;
 	background-color: #f1f1f1;
 	z-index: 1;
 
 	// 广告位轮播器相关样式
 	.swiper {
-		width: 750upx;
-		height: 400upx;
+		width: 750rpx;
+		height: 400rpx;
 		position: absolute;
 		left: 0;
 		top: 0;
@@ -361,18 +361,18 @@ export default {
 		z-index: 1;
 
 		.banner-swiper-img {
-			width: 750upx;
-			height: 400upx;
+			width: 750rpx;
+			height: 400rpx;
 			box-shadow: 0 0 2px 0 rgb(188, 188, 188);
 		}
 	}
 
 	.crile {
-		width: 750upx;
-		height: 50upx;
+		width: 750rpx;
+		height: 50rpx;
 		position: absolute;
 		left: 0;
-		top: 355upx;
+		top: 355rpx;
 		z-index: 9;
 	}
 
@@ -380,11 +380,11 @@ export default {
 	.card-header {
 		position: absolute;
 		left: 0;
-		top: 320upx;
-		height: 160upx;
+		top: 320rpx;
+		height: 160rpx;
 		z-index: 99;
-		width: 710upx;
-		margin-left: 20upx;
+		width: 710rpx;
+		margin-left: 20rpx;
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
@@ -393,11 +393,11 @@ export default {
 		align-content: center;
 
 		.card-one {
-			width: 328upx;
-			height: 96upx;
-			border-radius: 49upx;
+			width: 328rpx;
+			height: 96rpx;
+			border-radius: 49rpx;
 			background-color: #fff;
-			margin: 0 10upx;
+			margin: 0 10rpx;
 			box-shadow: 0 0 2px 0 rgb(188, 188, 188);
 			display: flex;
 			flex-direction: row;
@@ -407,18 +407,18 @@ export default {
 			align-content: center;
 
 			.img {
-				width: 44upx;
-				height: 44upx;
-				margin-left: 50upx;
+				width: 44rpx;
+				height: 44rpx;
+				margin-left: 50rpx;
 			}
 
 			.iright {
-				margin-left: 30upx;
+				margin-left: 30rpx;
 				text-align: left;
 				color: #888;
 
 				.title {
-					font-size: 30upx;
+					font-size: 30rpx;
 					color: #001432;
 				}
 
@@ -429,8 +429,8 @@ export default {
 					justify-content: space-between;
 					align-items: center;
 					align-content: center;
-					font-size: 20upx;
-					margin-top: -5upx;
+					font-size: 20rpx;
+					margin-top: -5rpx;
 				}
 			}
 		}
@@ -438,20 +438,20 @@ export default {
 
 	// 推荐、咨询 按钮样式
 	.tabs-box {
-		width: 750upx;
+		width: 750rpx;
 		position: absolute;
 		z-index: 1;
 		left: 0;
-		top: 480upx;
+		top: 480rpx;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
 
 		.one-nav {
-			height: 80upx;
-			width: 110upx;
+			height: 80rpx;
+			width: 110rpx;
 			color: #9b9b9b;
-			font-size: 36upx;
+			font-size: 36rpx;
 			text-align: center;
 			font-weight: blod;
 
@@ -465,7 +465,7 @@ export default {
 // 此刻 栏目样式\
 .swiper-box {
 	background-color: #f1f1f1;
-	padding: 60upx 30upx 40upx;
+	padding: 60rpx 30rpx 40rpx;
 }
 .swiper-item {
 	overflow: hidden;
@@ -473,30 +473,30 @@ export default {
 .sns-now {
 	// 动态相关瀑布流样式
 	.feeds-box {
-		width: 735upx;
-		margin-left: 13upx;
-		padding-bottom: 20upx;
+		width: 735rpx;
+		margin-left: 13rpx;
+		padding-bottom: 20rpx;
 
 		.feed-one {
-			width: 358upx;
-			margin-bottom: 12upx;
+			width: 358rpx;
+			margin-bottom: 12rpx;
 			background-color: #fff;
-			border-radius: 20upx;
+			border-radius: 20rpx;
 
 			position: relative;
 
 			.feed-img {
-				width: 358upx;
-				height: 300upx;
-				border-radius: 10upx;
+				width: 358rpx;
+				height: 300rpx;
+				border-radius: 10rpx;
 			}
 
 			.feed-title {
-				width: 350upx;
-				margin-top: 15upx;
-				margin-left: 10upx;
-				font-size: 28upx;
-				line-height: 40upx;
+				width: 350rpx;
+				margin-top: 15rpx;
+				margin-left: 10rpx;
+				font-size: 28rpx;
+				line-height: 40rpx;
 				color: #001432;
 				text-align: left;
 			}
@@ -508,10 +508,10 @@ export default {
 				justify-content: space-between;
 				align-items: center;
 				align-content: center;
-				margin-top: 10upx;
-				font-size: 20upx;
+				margin-top: 10rpx;
+				font-size: 20rpx;
 				color: #666;
-				padding: 0 10upx 16upx;
+				padding: 0 10rpx 16rpx;
 
 				.iview {
 					display: flex;
@@ -528,19 +528,19 @@ export default {
 						justify-content: space-between;
 						align-items: center;
 						align-content: center;
-						height: 60upx;
-						padding: 0 10upx;
+						height: 60rpx;
+						padding: 0 10rpx;
 						background-color: #ffffff;
 					}
 				}
 
 				.micon {
-					width: 32upx;
-					height: 28upx;
+					width: 32rpx;
+					height: 28rpx;
 				}
 
 				.love-count {
-					padding-left: 10upx;
+					padding-left: 10rpx;
 					color: #757474;
 				}
 			}
@@ -551,10 +551,10 @@ export default {
 // 轮播页面 资讯
 .sns-news {
 	background-color: #fff;
-	width: 750upx;
+	width: 750rpx;
 
 	.one-new {
-		width: 700upx;
+		width: 700rpx;
 		height: 74px;
 		display: flex;
 		flex-direction: row;
@@ -564,13 +564,13 @@ export default {
 		align-content: center;
 		padding-bottom: 10px;
 		padding-top: 10px;
-		padding-left: 25upx;
-		padding-right: 25upx;
+		padding-left: 25rpx;
+		padding-right: 25rpx;
 		border-bottom: 1px solid #f1f1f1;
 
 		.left {
-			width: 490upx;
-			height: 140upx;
+			width: 490rpx;
+			height: 140rpx;
 			text-align: left;
 			display: flex;
 			flex-direction: column;
@@ -578,29 +578,29 @@ export default {
 			align-items: flex-start;
 
 			.title {
-				font-size: 30upx;
-				line-height: 42upx;
+				font-size: 30rpx;
+				line-height: 42rpx;
 				color: #001432;
-				margin-top: 21upx;
+				margin-top: 21rpx;
 			}
 
 			.uinfo {
-				width: 490upx;
+				width: 490rpx;
 				display: flex;
 				flex-direction: row;
 				flex-wrap: nowrap;
 				justify-content: space-between;
 				align-items: center;
 				align-content: center;
-				margin-top: 6upx;
-				font-size: 20upx;
+				margin-top: 6rpx;
+				font-size: 20rpx;
 				color: #999;
 
 				.utime {
-					font-size: 24upx;
+					font-size: 24rpx;
 
 					.name {
-						max-width: 120upx;
+						max-width: 120rpx;
 						color: #777;
 					}
 				}
@@ -608,13 +608,13 @@ export default {
 		}
 
 		.right {
-			width: 120upx;
+			width: 120rpx;
 
 			.pic {
-				width: 120upx;
-				height: 120upx;
-				margin-top: 20upx;
-				border-radius: 6upx;
+				width: 120rpx;
+				height: 120rpx;
+				margin-top: 20rpx;
+				border-radius: 6rpx;
 			}
 		}
 	}

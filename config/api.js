@@ -20,6 +20,10 @@ export const changeUserName = (params,config={}) => http.post('user/changeUserNa
 export const changeAvatar = (params,config={}) => http.post('user/changeAvatar',params,config)
 export const changePassword = (params,config={}) => http.post('user/',params,config)
 
-//上传图片
+//创建住户信息
+export const createResidentInfo = (params,config={}) => http.post('resident/create',params,config)
+export const getResidentInfo = (config={}) => http.get('resident/getResidentUser',config)
 
-// export const upload = (config={}) => http.upload('goods/upoload',config)
+//创建报修信息
+export const createDeviceInfo = (params,config={}) => http.post('device/create',params,config)
+export const getDeviceInfo = (config={}) => http.get('device/getDeviceUser',config)
