@@ -34,6 +34,16 @@
 											<u--text :text="item.device_name" type="primary" bold size="17"></u--text>
 											<u--text margin="0 0 8px 0" :text="item.device_info"></u--text>
 											<u-album :urls="[item.image]" keyName="src2"></u-album>
+											<view class="result u-border-top">
+												<view class="flex"v-if="!item.handler_state">
+													<u-icon name="thumb-down"></u-icon>
+													未处理
+												</view>
+												<view class="flex" v-else>
+													<u-icon name="thumb-up"></u-icon>
+													已处理
+												</view>
+											</view>
 										</view>
 									</view>
 								</view>
@@ -122,6 +132,9 @@ export default {
 		this.loadmore();
 	},
 	methods: {
+		deletePic() {
+			this.fileList = [];
+		},
 		afterRead(event) {
 			this.fileList = [].concat(event.file);
 			console.log(event.file);

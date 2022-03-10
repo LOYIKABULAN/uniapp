@@ -10,7 +10,6 @@ export const getAdImage = (params,config={}) => http.get('/advertisement/getAd',
 
 
 //获取动态信息
-export const getFeedsInfo = (config={}) =>http.get('goods/feeds',config)
 
 //获取资讯列表
 export const getNewsList = (config={}) =>http.get('news/getNews',config)
@@ -27,3 +26,11 @@ export const getResidentInfo = (config={}) => http.get('resident/getResidentUser
 //创建报修信息
 export const createDeviceInfo = (params,config={}) => http.post('device/create',params,config)
 export const getDeviceInfo = (config={}) => http.get('device/getDeviceUser',config)
+
+//获取我的商品||动态列表
+export const getMyFeeds = (config={}) => http.get('/goods/feedsPersonal',config)
+export const getFeedsInfo = (config={}) =>http.get('goods/feeds',config)
+
+
+//发布接口
+export const releaseFeeds = (params,config={}) => http.post('goods/',params,config)

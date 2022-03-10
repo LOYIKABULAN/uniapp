@@ -20,33 +20,72 @@
 				<view class="view-circle" />
 
 				<view class="user-tabs">
-					<view class="tab-item left" style="width: 94%;" @click="gotoLink('../../subpages/mySetting')">
+					<view class="tab-item left" @click="gotoLink('../../subpages/mySetting')">
 						<image class="tab-svg" src="@/static/setup_b.png" mode="aspectFit" />
 						<text class="tab-name">个人设置</text>
 					</view>
-					<!-- <view class="tab-item" @tap="viewMsg">
+					<!-- 					<view class="tab-item" @tap="viewMsg">
 						<image class="tab-svg" src="@/static/bell.png" mode="aspectFit" />
 						<text class="tab-name">我的消息</text>
 						<text class="badges right" >0000</text>
 					</view> -->
+					<view class="tab-item u-error" @tap="logout()">退出登录</view>
 				</view>
 			</view>
 
 			<view class="feeds-box">
-				
+				<view class="feeds-title " style="font-size: 45rpx; font-weight: 500;">我的发布</view>
+				<waterfallsFlow  style="width: 90%;" @wapper-lick="toDetail" ref="waterfall" :list="feedsList" imageSrcKey="goods_image">
+					<!-- #ifndef  MP-WEIXIN -->
+					<template v-slot:default="item">
+						<!-- 此处添加插槽内容 -->
+						<view class="cnt">
+							<view class="title">{{ item.goods_name }}</view>
+						</view>
+					</template>
+					<!--  #endif -->
+
+					<!--  #ifdef  MP-WEIXIN -->
+					<!-- 微信小程序自定义内容 -->
+					<view  v-for="(item, index) of feedsList" imageSrcKey="goods_image" :key="index" slot="slot{{index}}">
+						<view class="cnt">
+							<view class="title">{{ item.goods_name }}</view>
+						</view>
+					</view>
+					<!--  #endif -->
+				</waterfallsFlow>
 			</view>
-			<button class="logout" type="warn" @click="logout">退出登录</button>
 		</view>
+		<u-loadmore :status="status" />
 		<!-- 登陆组件 -->
 		<login ref="login" />
+		<!-- 发布 -->
+		<view
+			class="release"
+			@click="gotoLink('../../subpages/releaseFeeds')"
+			style=" position: fixed; bottom: 150rpx;right: 50rpx; z-index: 9; background-color: #F4F5F6; border-radius: 50%;"
+		>
+			<image src="../../static/release.png" mode="widthFix" style="width: 100rpx;height: 100rpx;"></image>
+		</view>
 	</view>
 </template>
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex';
+import { getMyFeeds } from '../../config/api.js';
+import waterfallsFlow from '@/components/maramlee-waterfalls-flow/maramlee-waterfalls-flow.vue';
 export default {
+	components: { waterfallsFlow },
 	data() {
-		return {};
+		return {
+			feedsTotal: '',
+			feedsParams: {
+				pageSize: 8,
+				pageNum: 1
+			},
+			feedsList: [],
+			status: 'loadmore'
+		};
 	},
 	computed: {
 		...mapGetters({
@@ -56,14 +95,46 @@ export default {
 		})
 	},
 	onPageScroll(res) {},
-	onLoad() {},
+	mounted() {
+	},
+	onShow(){
+		this.feedsList = []
+		this.getMyFeedsList()
+	},
 	onPullDownRefresh() {},
+	onReachBottom() {
+		let page = this.feedsParams.pageNum;
+		const allPage = Math.ceil(this.feedsTotal / this.feedsParams.pageSize);
+		if(this.feedsTotal<this.feedsParams.pageSize) this.status = 'nomore'
+		if (page >= allPage) return;
+		this.status = 'loading';
+		this.feedsParams.pageNum += 1;
+		this.getMyFeedsList();
+		if (this.feedsParams.pageNum >= allPage) this.status = 'nomore';
+		else this.status = 'loading';
+	},
 	methods: {
-		gotoLink(url){
-			console.log(url)
+
+		toDetail(item) {
+			uni.navigateTo({
+				url: '../../subpages/feedInfo?data=' + JSON.stringify(item)
+			});
+		},
+		async getMyFeedsList() {
+			const params = {
+				params: this.feedsParams,
+				custom: { auth: true }
+			};
+			const res = await getMyFeeds(params);
+			console.log(res);
+			this.feedsTotal = res.total;
+			this.feedsList.push(...res.list);
+		},
+		gotoLink(url) {
+			console.log(url);
 			uni.navigateTo({
 				url
-			})
+			});
 		},
 		showLogin() {
 			if (this.token.length === 0) {
@@ -254,6 +325,7 @@ export default {
 
 // 动态相关瀑布流样式
 .feeds-box {
+	margin: 0 20rpx;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -271,11 +343,10 @@ export default {
 }
 
 .logout {
-	position: absolute;
 	left: 0;
 	right: 0;
 	margin: auto;
+	margin-top: 40rpx;
 	width: 600rpx;
-	bottom: 50rpx;
 }
 </style>

@@ -1,6 +1,15 @@
 {
-  "dependencies": {
-    "dayjs": "^1.10.8",
-    "uview-ui": "^2.0.28"
-  }
+    "id": "c-ui",
+    "name": "cyEditor-高颜值-富文本-editor",
+    "version": "1.0.0",
+    "description": "亲测：适配安卓，IOS，小程序，导入解压即用",
+    "keywords": [
+        "富文本,editor,高颜值"
+    ],
+    "dcloudext": {
+        "category": [
+            "前端组件",
+            "通用组件"
+        ]
+    }
 }

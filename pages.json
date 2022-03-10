@@ -20,69 +20,97 @@
 				"enablePullDownRefresh": false
 			}
 
-		}
-	    ,{
-            "path" : "pages/webview/webview",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
-	"subPackages":[
-		{
-			"root":"subpages",
-			"pages":[
-				{
-					"path":"feedInfo",
-					"style":{
-						"navigationBarTitleText":"详情",
-						"navigationBarTextStyle":"black",
-						"navigationBarBackgroundColor":"#FFFFFF",
-						"backgroundColor":"#FFFFFF"
-					}
-				},
-				{
-					"path":"newsInfo",
-					"style":{
-						"navigationBarTitleText":"详情",
-						"navigationBarTextStyle":"black",
-						"navigationBarBackgroundColor":"#FFFFFF",
-						"backgroundColor":"#FFFFFF"
-					}
-				},
-				{
-					"path":"mySetting",
-					"style":{
-						"navigationBarTitleText":"个人设置",
-						"navigationBarTextStyle":"black",
-						"navigationBarBackgroundColor":"#FFFFFF",
-						"backgroundColor":"#FFFFFF"
-					}
-				},
-				{
-					"path":"resident",
-					"style":{
-						"navigationBarTitleText":"住户信息",
-						"navigationBarTextStyle":"black",
-						"navigationBarBackgroundColor":"#FFFFFF",
-						"backgroundColor":"#FFFFFF"
-					}
-				},
-				{
-					"path":"device",
-					"style":{
-						"navigationBarTitleText":"报修信息",
-						"navigationBarTextStyle":"black",
-						"navigationBarBackgroundColor":"#FFFFFF",
-						"backgroundColor":"#FFFFFF"
-					}
-				}
-			]
+		}, {
+			"path": "pages/webview/webview",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "uni_modules/linke-ux-editor/pages/editPic",
+			"style": {
+				"navigationBarTitleText": "图片编辑",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "uni_modules/linke-ux-editor/pages/editTitle",
+			"style": {
+				"navigationBarTitleText": "标题编辑",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "uni_modules/linke-ux-editor/pages/editTxt",
+			"style": {
+				"navigationBarTitleText": "文本编辑",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "uni_modules/linke-ux-editor/pages/editVideo",
+			"style": {
+				"navigationBarTitleText": "视频编辑",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
+	"subPackages": [{
+		"root": "subpages",
+		"pages": [{
+				"path": "feedInfo",
+				"style": {
+					"navigationBarTitleText": "详情",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#FFFFFF",
+					"backgroundColor": "#FFFFFF"
+				}
+			},
+			{
+				"path": "newsInfo",
+				"style": {
+					"navigationBarTitleText": "详情",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#FFFFFF",
+					"backgroundColor": "#FFFFFF"
+				}
+			},
+			{
+				"path": "mySetting",
+				"style": {
+					"navigationBarTitleText": "个人设置",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#FFFFFF",
+					"backgroundColor": "#FFFFFF"
+				}
+			},
+			{
+				"path": "resident",
+				"style": {
+					"navigationBarTitleText": "住户信息",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#FFFFFF",
+					"backgroundColor": "#FFFFFF"
+				}
+			},
+			{
+				"path": "device",
+				"style": {
+					"navigationBarTitleText": "报修信息",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#FFFFFF",
+					"backgroundColor": "#FFFFFF"
+				}
+			},
+			{
+				"path": "releaseFeeds",
+				"style": {
+					"navigationBarTitleText": "发布",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#FFFFFF",
+					"backgroundColor": "#FFFFFF"
+				}
+			}
+		]
+	}],
 	"tabBar": {
 		"color": "#000",
 		"selectedColor": "#0050FF",
@@ -113,10 +141,11 @@
 		"backgroundColor": "#F8F8F8"
 	},
 	"easycom": {
-		
+
 		// 下载安装的方式需要前面的"@/"，npm安装的方式无需"@/"
 		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue",
 		// npm安装方式
 		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
 	}
+
 }

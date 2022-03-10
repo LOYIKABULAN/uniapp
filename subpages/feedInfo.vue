@@ -9,9 +9,8 @@
 				{{data.goods_name}}
 			</view>
 			<image style="width: 100%;margin: 20rpx 0;" :src="data.goods_image" mode="widthFix"></image>
-			<view class="detail">
-				<rich-text :nodes="data.detail"></rich-text>
-			</view>
+
+			<linke-ux-parser :list="content"></linke-ux-parser>
 			<view class="foot">
 				<view class="release_time">
 					{{data.createdAt}}发布
@@ -25,12 +24,14 @@
 export default {
 	data() {
 		return {
-			data: ''
+			data: '',
+			content:[]
 		};
 	},
 	onLoad(data) {
 		this.data = JSON.parse(data.data);
-		console.log(this.data);
+		this.content = JSON.parse(this.data.detail)
+		console.log(this.data,this.content);
 	}
 };
 </script>
