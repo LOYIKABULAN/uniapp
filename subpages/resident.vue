@@ -160,7 +160,7 @@ export default {
 			this.fileList = [].concat(event.file);
 			console.log(event.file);
 			uni.uploadFile({
-				url: 'http://localhost:3333/goods/upload',
+				url: getApp().globalData.imageUploadUrl,
 				filePath: event.file[0].url,
 				name: 'file',
 				fileType: 'image',

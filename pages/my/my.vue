@@ -37,7 +37,7 @@
 				<view class="feeds-title " style="font-size: 45rpx; font-weight: 500;">我的发布</view>
 				<waterfallsFlow  style="width: 90%;" @wapper-lick="toDetail" ref="waterfall" :list="feedsList" imageSrcKey="goods_image">
 					<!-- #ifndef  MP-WEIXIN -->
-					<template v-slot:default="item">
+					<template  v-slot:default="item">
 						<!-- 此处添加插槽内容 -->
 						<view class="cnt">
 							<view class="title">{{ item.goods_name }}</view>
@@ -151,7 +151,15 @@ export default {
 
 <style lang="scss" scoped>
 //住户信息
+.me{
+}
+.feeds-title{
+	margin-bottom: 50rpx;
+}
 
+/deep/ .waterfalls-list{
+	box-shadow:10rpx 10rpx  20rpx rgba($color: #000000, $alpha: .1);
+}
 // 用户信息
 .user-info {
 	position: relative;
@@ -325,7 +333,6 @@ export default {
 
 // 动态相关瀑布流样式
 .feeds-box {
-	margin: 0 20rpx;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

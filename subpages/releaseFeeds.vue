@@ -11,7 +11,7 @@
 			</u-form-item>
 			<u-form-item label="详细信息" prop="detail" borderBottom ref="item5"></u-form-item>
 		</u--form>
-		<linke-ux-editor v-model="model.detail" :cloud="false" url="http://localhost:3333/goods/upload" :token="{ Authorization: token }"></linke-ux-editor>
+		<linke-ux-editor v-model="model.detail" :cloud="false" :url="getApp().globalData.imageUploadUrl" :token="{ Authorization: token }"></linke-ux-editor>
 		<u-button class="submi-btn" type="primary" @click="submit">提交</u-button>
 	</view>
 </template>
@@ -113,7 +113,7 @@ export default {
 			this.fileList = [].concat(event.file);
 			console.log(event.file);
 			uni.uploadFile({
-				url: 'http://localhost:3333/goods/upload',
+				url: getApp().globalData.imageUploadUrl,
 				filePath: event.file[0].url,
 				name: 'file',
 				fileType: 'image',

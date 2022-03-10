@@ -98,6 +98,10 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
+  globalData: {
+    imageUploadUrl: 'http://101.33.213.101:3333/goods/upload'
+    // imageUploadUrl:'http://localhost:3333/goods/upload'
+  },
   onLaunch: function onLaunch() {
     console.log('App Launch');
   },
