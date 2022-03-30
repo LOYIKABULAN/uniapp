@@ -7,6 +7,7 @@ module.exports = (vm) => {
         /* config 为默认全局配置*/
         config.baseURL = 'http://localhost:3333'; /* 根域名 */
         // config.baseURL = 'http://101.33.213.101:3333'; /* 根域名 */
+		config.custom = { auth: true }
         return config
     })
 	
@@ -32,7 +33,8 @@ module.exports = (vm) => {
 		if (data.code !== 0) { 
 			// 如果没有显式定义custom的toast参数为false的话，默认对报错进行toast弹出提示
 			if (custom.toast !== false) {
-				uni.$u.toast(data.message)
+				uni.$u.toast(data.message) 
+				
 			}
 
 			// 如果需要catch返回，则进行reject

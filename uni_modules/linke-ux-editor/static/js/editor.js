@@ -33,6 +33,9 @@ const uploadImg = (imgNum = 1, options = {
 		return ret.result.goods_img
 	}) => {
 	return new Promise((resolve, reject) => {
+		options.url=getApp().globalData.imageUploadUrl;
+		let token = uni.getStorageSync('userToken');
+		options.token = { Authorization: token }
 		if (!options.url) {
 			reject('请配置上传URL');
 			return;

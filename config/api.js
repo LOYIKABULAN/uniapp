@@ -1,9 +1,9 @@
 const http = uni.$u.http
 
+const defaultConfig = { custom: { auth: true }, params:{} }
 // post请求，获取菜单
 export const login = (params, config = {}) => http.post('/user/login', params, config)
 export const register = (params,config={}) => http.post('/user/register',params,config)
-// get请求，获取菜单，注意：get请求的配置等，都在第二个参数中，详见前面解释
 export const getUserInfo = (params,config={}) => http.get('/user/info', params,config)
 //获取广告图
 export const getAdImage = (params,config={}) => http.get('/advertisement/getAd',params,config)
@@ -30,7 +30,24 @@ export const getDeviceInfo = (config={}) => http.get('device/getDeviceUser',conf
 //获取我的商品||动态列表
 export const getMyFeeds = (config={}) => http.get('/goods/feedsPersonal',config)
 export const getFeedsInfo = (config={}) =>http.get('goods/feeds',config)
-
-
+// 评论 
+export const submitComment = (params,config=defaultConfig) => http.post('comment/',params,config)
+export const getCommentList = (config={}) =>http.get('comment/',config) 
 //发布接口
 export const releaseFeeds = (params,config={}) => http.post('goods/',params,config)
+
+//点赞
+export const like = (params,config=defaultConfig) => http.post('like/',params,config)
+export const getLike = (config={}) =>http.get('like/',config) 
+
+//地址
+export const submitAddress = (params,config=defaultConfig) => http.post('address/',params,config)
+export const getAddress = (config=defaultConfig) =>http.get('address/',config) 
+export const deleteAddress = ({params,config=defaultConfig,id}) => http.delete('address/'+id,params,config)
+export const setDefaultAddress = ({params,config=defaultConfig,id}) => http.post('address/'+id,params,config)
+
+//订单
+export const createOrders = (params,config=defaultConfig) => http.post('orders/',params,config)
+export const getOrder = (config={}) =>http.get('orders/',config) 
+export const getSaleOrder = (config={}) =>http.get('orders/sale',config) 
+export const setSatus = ({params,config=defaultConfig,id}) => http.post('orders/'+id,params,config)

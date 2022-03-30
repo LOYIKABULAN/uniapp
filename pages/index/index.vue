@@ -26,9 +26,9 @@
 		</view>
 
 		<!-- 功能 -->
-		<view class="funtion-grid">
+		<view class="funtion-grid" >
 			<u-grid :border="false" col="3">
-				<u-grid-item v-for="(listItem, listIndex) in funtionList" :key="listIndex">
+				<u-grid-item  v-for="(listItem, listIndex) in funtionList" :key="listIndex">
 					<view @click="toFunction(listIndex)" style="display: flex; flex-direction: column; align-items: center;">
 						<u-icon :customStyle="{ paddingTop: 20 + 'rpx' }" :name="listItem.name" :size="22"></u-icon>
 						<text class="grid-text">{{ listItem.title }}</text>
@@ -118,8 +118,8 @@ export default {
 					title: '设施报修'
 				},
 				{
-					name: 'star',
-					title: '星星'
+					name: 'map',
+					title: '我的地址'
 				},
 				{
 					name: 'hourglass',
@@ -162,6 +162,15 @@ export default {
 	methods: {
 		...mapActions(['addToken']),
 		toFunction(index) {
+			
+			if (this.userInfo.token.length === 0) {
+				uni.showToast({
+					title: '请登录',
+					icon: 'error'
+				});
+				this.$refs.login.open();
+				return
+			} 
 			switch (index) {
 				case 0:
 				uni.navigateTo({
@@ -171,6 +180,11 @@ export default {
 				case 1:
 				uni.navigateTo({
 					url:'../../subpages/device'
+				})
+					break;
+				case 2:
+				uni.navigateTo({
+					url:'../../subpages/address'
 				})
 					break;
 				default:
@@ -205,7 +219,7 @@ export default {
 		scrolltolower() {
 			let page = this.newsParams.pageNum;
 			const allPage = Math.ceil(this.indexTotal / this.newsParams.pageSize);
-			if (page >= allPage) return;
+			if (page >= allPage) return this.listStatus = 'nomore';
 			this.listStatus = 'loading';
 			this.newsParams.pageNum += 1;
 			this.getIndexList();
@@ -276,6 +290,7 @@ export default {
 		this.getAdverts();
 		this.getFeeds();
 		this.getIndexList();
+		this.scrolltolower()
 	},
 	onPullDownRefresh() {
 		uni.reLaunch({
@@ -287,10 +302,11 @@ export default {
 	},
 
 	onReachBottom() {
+		console.log('inbottom')
 		if (this.currentSwiperIndex === 0) {
 			let page = this.feedsParams.pageNum;
 			const allPage = Math.ceil(this.feedsTotal / this.feedsParams.pageSize);
-			if (page >= allPage) return;
+			if (page >= allPage) return this.status = 'nomore';
 			// this.setHeight();
 			this.status = 'loading';
 			this.feedsParams.pageNum += 1;

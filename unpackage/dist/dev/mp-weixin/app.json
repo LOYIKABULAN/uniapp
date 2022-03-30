@@ -52,11 +52,7 @@
             }
         ]
     },
-    "permission": {
-        "scope.userLocation": {
-            "desc": ""
-        }
-    },
+    "permission": {},
     "usingComponents": {
         "login": "/components/login/login"
     },

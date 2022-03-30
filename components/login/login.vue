@@ -65,6 +65,7 @@ export default {
 					icon:'success'
 				})
 				this.close()
+				uni.reLaunch({url:'../../pages/my/my'})
 			} catch (e) {
 				//TODO handle the exception
 				console.error('登录失败', e);

@@ -80,7 +80,7 @@ export default {
 		return {
 			feedsTotal: '',
 			feedsParams: {
-				pageSize: 8,
+				pageSize: 6,
 				pageNum: 1
 			},
 			feedsList: [],
@@ -96,16 +96,20 @@ export default {
 	},
 	onPageScroll(res) {},
 	mounted() {
-	},
-	onShow(){
-		this.feedsList = []
 		this.getMyFeedsList()
 	},
-	onPullDownRefresh() {},
+	onShow(){
+		if(this.feedsTotal<this.feedsParams.pageSize) this.status = 'nomore'
+	},
+	onPullDownRefresh() {
+		uni.reLaunch({
+			url:'../my/my'
+		})
+	},
 	onReachBottom() {
+		console.log('hh')
 		let page = this.feedsParams.pageNum;
 		const allPage = Math.ceil(this.feedsTotal / this.feedsParams.pageSize);
-		if(this.feedsTotal<this.feedsParams.pageSize) this.status = 'nomore'
 		if (page >= allPage) return;
 		this.status = 'loading';
 		this.feedsParams.pageNum += 1;
@@ -131,19 +135,26 @@ export default {
 			this.feedsList.push(...res.list);
 		},
 		gotoLink(url) {
-			console.log(url);
-			uni.navigateTo({
-				url
-			});
+			if(this.showLogin()){
+				uni.navigateTo({
+					url
+				});
+			}
+			
 		},
 		showLogin() {
 			if (this.token.length === 0) {
 				this.$refs.login.open();
+				return false
 			}
+			return true
 		},
 		...mapActions(['deleteToken']),
 		logout() {
 			this.deleteToken();
+			uni.reLaunch({
+				url:'../my/my'
+			})
 		}
 	}
 };

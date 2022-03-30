@@ -374,6 +374,15 @@ var _vuex = __webpack_require__(/*! vuex */ 137);function _interopRequireDefault
   methods: _objectSpread(_objectSpread(_objectSpread({},
   (0, _vuex.mapActions)(['addToken'])), {}, {
     toFunction: function toFunction(index) {
+
+      if (this.userInfo.token.length === 0) {
+        uni.showToast({
+          title: '请登录',
+          icon: 'error' });
+
+        this.$refs.login.open();
+        return;
+      }
       switch (index) {
         case 0:
           uni.navigateTo({

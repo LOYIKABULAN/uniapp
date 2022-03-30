@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import { mapState } from 'vuex';
 import { getFeedsInfo } from '../../config/api.js';
 export default {
 	data() {
@@ -28,7 +28,7 @@ export default {
 			feedsTotal: 1
 		};
 	},
-	computed:{
+	computed: {
 		...mapState(['userInfo'])
 	},
 	mounted() {
@@ -61,11 +61,18 @@ export default {
 			for (let i = 0; i < this.feedsList.length; i++) {
 				if (i % 6 === 0 && !!this.feedsList[i + 5]) {
 					showArrList.push(this.feedsList.slice(i, i + 6));
+				}else{
+					this.feedStatus = 'nomore'
 				}
 			}
 			this.showFeedsList = showArrList;
 			console.log(this.showFeedsList);
 		}
+	},
+	onPullDownRefresh() {
+		uni.reLaunch({
+			url: '../feeds/feeds'
+		});
 	},
 	onReachBottom() {
 		let page = this.feedsParams.pageNum;

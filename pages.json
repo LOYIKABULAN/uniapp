@@ -13,21 +13,30 @@
 				"enablePullDownRefresh": true
 			}
 
-		}, {
-			"path": "pages/my/my",
-			"style": {
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
+		},  {
 			"path": "pages/webview/webview",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 
-		}, {
+		},{
+			"path": "pages/order/order",
+			"style": {
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+
+		},
+		{
+			"path": "pages/my/my",
+			"style": {
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		
+		},
+		{
 			"path": "uni_modules/linke-ux-editor/pages/editPic",
 			"style": {
 				"navigationBarTitleText": "图片编辑",
@@ -108,6 +117,15 @@
 					"navigationBarBackgroundColor": "#FFFFFF",
 					"backgroundColor": "#FFFFFF"
 				}
+			},
+			{
+				"path": "address",
+				"style": {
+					"navigationBarTitleText": "地址",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#FFFFFF",
+					"backgroundColor": "#FFFFFF"
+				}
 			}
 		]
 	}],
@@ -125,6 +143,12 @@
 				"selectedIconPath": "static/selectedList.png",
 				"text": "动态",
 				"pagePath": "pages/feeds/feeds"
+			},
+			{
+				"iconPath": "/static/order.png",
+				"selectedIconPath": "static/order.png",
+				"text": "订单",
+				"pagePath": "pages/order/order"
 			},
 			{
 				"iconPath": "static/user.png",
